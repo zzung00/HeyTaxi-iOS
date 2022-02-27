@@ -27,3 +27,22 @@ struct TaxiResponse: Codable {
     let taxi: TaxiModel
 }
 
+class HeyTaxiService {
+    static let host = "172.30.1.43"
+    static let baseUrl = "http://\(host)"
+    static let shared =  HeyTaxiService()
+    
+    let header: HTTPHeaders = [
+        "Content-Type" : "application/json",
+        "Accept" : "application/json"
+    ]
+    
+    func serverConnect(completion: @escaping (Bool) -> Void) {
+        AF.request(HeyTaxiService.baseUrl, method: .get, encoding: JSONEncoding.default).responseJSON {
+            response  in
+            DispatchQueue.main.async {
+                completion(response.response?.statusCode == 200)
+            }
+        }
+    }
+}
