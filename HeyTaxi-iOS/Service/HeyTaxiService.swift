@@ -45,4 +45,25 @@ class HeyTaxiService {
             }
         }
     }
+    
+    func verifyRequest(phone: String, completion: @escaping (VerifyResponse) -> Void) {
+        let url: String = HeyTaxiService.baseUrl + "/api/verify/request"
+        let body: Parameters = [
+            "phone": phone
+        ]
+        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default).responseJSON {
+            response in
+            switch response.result {
+            case.success(let value):
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                    let decoder = JSONDecoder()
+                    let verifyResponse = try decoder.decode(VerifyResponse.self, from: data)
+                    completion(verifyResponse)
+                } catch {}
+            default:
+                return
+            }
+        }
+    }
 }
