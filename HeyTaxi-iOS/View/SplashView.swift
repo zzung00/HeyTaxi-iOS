@@ -17,8 +17,18 @@ struct SplashView: View {
             } else {
                 Text("HeyTaxi")
                     .bold()
-                    
+                    .foregroundColor(.mainGreen)
+                    .font(Font.custom("JalnanOTF", size: 50))
             }
+        }
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                viewModel.serverConnect()
+            }
+        })
+        
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(title: Text("HeyTaxi"), message: Text("서버에 연결 할 수 없습니다"), dismissButton: .default(Text("확인")))
         }
     }
 }
