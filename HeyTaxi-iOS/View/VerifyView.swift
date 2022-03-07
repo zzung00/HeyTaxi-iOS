@@ -26,8 +26,21 @@ struct VerifyView: View {
                     .keyboardType(.numberPad)
                     .disableAutocorrection(true)
                 
-                //NavigationLink(destination: , label: <#T##() -> _#>)
+                NavigationLink(destination: VerifiedView(phoneNumber: phoneNumber), isActive: $viewModel.success) {
+                    Button(action: {viewModel.verifyRequest(phone: phoneNumber)}) {
+                        Text("인증 요청")
+                            .frame(width: 220, height: 50)
+                    }
+                }
+                .background(Color.mainGreen)
+                .cornerRadius(10)
+                .foregroundColor(.white)
+                .font(Font.body.bold())
+                .frame(width: 220)
+                
+                Spacer()
             }
+            .padding(EdgeInsets(top: 50, leading: 0, bottom: 50, trailing: 0))
         }
     }
 }
