@@ -13,7 +13,7 @@ struct SplashView: View {
     var body: some View {
         VStack {
             if viewModel.connects {
-                //VerifyView 불러오기
+                VerifyView()
             } else {
                 Text("HeyTaxi")
                     .bold()
