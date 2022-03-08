@@ -6,10 +6,38 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainView: View {
+    @StateObject private var viewModel = MainViewModel()
+    @State private var region: MKCoordinateRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: MapDefaults.latitude, longitude: MapDefaults.longitude),
+        span: MKCoordinateSpan(latitudeDelta: MapDefaults.zoom, longitudeDelta: MapDefaults.zoom))
+    
+    private enum MapDefaults {
+        static let latitude = 35.96322239939191
+        static let longitude = 126.98783602642584
+        static let zoom = 0.5
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: ProfileView()) {
+                        Image(systemName: "person")
+                    }
+                }
+            }
+            .onAppear {
+                viewModel.loadMe()
+                viewModel.requestPermission()
+                viewModel.registerSocket()
+            }
+        }.navigationBarHidden(true)
     }
 }
 
