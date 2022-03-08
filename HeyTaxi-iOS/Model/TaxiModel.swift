@@ -20,3 +20,9 @@ struct TaxiModel: Codable {
         self.carNumber = carNumber
     }
 }
+
+enum TaxiStatus: Codable {
+    case empty
+    case reservation
+    case off
+}
