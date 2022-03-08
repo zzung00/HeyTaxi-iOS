@@ -78,27 +78,39 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
         socketClient.sendMessage(message: result!, toDestination: "/app/empty/update", withHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!, "content-type": "application/json"], withReceipt: nil)
     }
     
-    func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        <#code#>
+    func disconnect() {
+        socketClient.disconnect()
     }
     
+    func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
+        
+    }
+    
+//    func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
+//            print("des :" + destination)
+//            print("jb : " + jsonBody!)
+//    }
+    
     func stompClientDidDisconnect(client: StompClientLib!) {
-        <#code#>
+        print("Socket is Disconnected!!!")
     }
     
     func stompClientDidConnect(client: StompClientLib!) {
-        <#code#>
+        print("Socket is Connected!!!")
+        subscribe()
     }
     
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {
-        <#code#>
+        print("receipt: \(receiptId)")
     }
     
     func serverDidSendError(client: StompClientLib!, withErrorMessage description: String, detailedErrorMessage message: String?) {
-        <#code#>
+        print("Error send: \(description)")
+        socketClient.disconnect()
+        registerSocket()
     }
     
     func serverDidSendPing() {
-        <#code#>
+        print("Server ping")
     }
 }
