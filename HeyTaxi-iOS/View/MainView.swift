@@ -12,12 +12,12 @@ struct MainView: View {
     @StateObject private var viewModel = MainViewModel()
     @State private var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: MapDefaults.latitude, longitude: MapDefaults.longitude),
-        span: MKCoordinateSpan(latitudeDelta: MapDefaults.zoom, longitudeDelta: MapDefaults.zoom))
+        span: MKCoordinateSpan(latitudeDelta: CLLocationDegrees(MapDefaults.zoom), longitudeDelta: MapDefaults.zoom))
     
     private enum MapDefaults {
         static let latitude = 35.96322239939191
         static let longitude = 126.98783602642584
-        static let zoom = 0.5
+        static let zoom = 0.01
     }
     
     var body: some View {
