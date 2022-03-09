@@ -142,4 +142,29 @@ class HeyTaxiService {
             }
         }
     }
+    
+    //사용자 이름 변경
+    func updateMe(completion: @escaping (UserResponse) -> Void) {
+        let url: String = HeyTaxiService.baseUrl + "/api/user"
+        var header = self.header
+        let token = TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)
+        
+        if (token != nil) {
+            header.add(name: "Authorization", value: token!)
+        }
+        AF.request(url, method: .put, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON {
+            response in
+            switch response.result {
+            case.success(let value):
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                    let decoder = JSONDecoder()
+                    let userResponse = try decoder.decode(UserResponse.self, from: data)
+                    completion(userResponse)
+                }catch {}
+            default:
+                return
+            }
+        }
+    }
 }
