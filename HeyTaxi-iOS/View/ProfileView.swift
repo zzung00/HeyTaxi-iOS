@@ -8,8 +8,31 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @State private var username = ""
+    @StateObject private var viewModel = ProfileViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack(alignment: .center, spacing: 10) {
+                
+            }
+            .onAppear {
+                viewModel.loadMe {
+                    user in
+                    
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {self.presentationMode.wrappedValue.dismiss()}) {
+                        Text("취소")
+                            .bold()
+                            .foregroundColor(.red)
+                    }
+                }
+            }
+        }
     }
 }
 
