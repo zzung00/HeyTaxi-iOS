@@ -16,7 +16,7 @@ class SplashViewModel: ObservableObject {
         HeyTaxiService.shared.serverConnect {
             result in
             self.connects = result
-            self.showAlert = result
+            self.showAlert = !result
         }
     }
 }
