@@ -28,7 +28,7 @@ struct TaxiResponse: Codable {
 }
 
 class HeyTaxiService {
-    static let host = "222.105.87.147"
+    static let host = "172.30.1.33"
     static let baseUrl = "http://\(host)"
     static let shared =  HeyTaxiService()
     
@@ -144,7 +144,7 @@ class HeyTaxiService {
     }
     
     //사용자 이름 변경
-    func updateMe(completion: @escaping (UserResponse) -> Void) {
+    func updateMe(name: String, completion: @escaping (UserResponse) -> Void) {
         let url: String = HeyTaxiService.baseUrl + "/api/user"
         var header = self.header
         let token = TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)
