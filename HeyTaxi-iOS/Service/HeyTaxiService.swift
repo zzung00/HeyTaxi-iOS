@@ -144,7 +144,7 @@ class HeyTaxiService {
     }
     
     //사용자 이름 변경
-    func updateMe(name: String, completion: @escaping (UserResponse) -> Void) {
+    func updateMe(user: UserModel, completion: @escaping (UserResponse) -> Void) {
         let url: String = HeyTaxiService.baseUrl + "/api/user"
         var header = self.header
         let token = TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)
@@ -152,7 +152,11 @@ class HeyTaxiService {
         if (token != nil) {
             header.add(name: "Authorization", value: token!)
         }
-        AF.request(url, method: .put, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON {
+        let body: Parameters = [
+            "name" : user.name!,
+            "username" : user.username!
+        ]
+        AF.request(url, method: .put, parameters: body, encoding: JSONEncoding.default, headers: header).responseJSON {
             response in
             switch response.result {
             case.success(let value):
@@ -160,6 +164,7 @@ class HeyTaxiService {
                     let data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                     let decoder = JSONDecoder()
                     let userResponse = try decoder.decode(UserResponse.self, from: data)
+                    print(userResponse)
                     completion(userResponse)
                 }catch {}
             default:
