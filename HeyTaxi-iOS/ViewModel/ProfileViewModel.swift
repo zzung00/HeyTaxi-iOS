@@ -12,12 +12,16 @@ class ProfileViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var user: UserModel?
     
-    func loadMe() {
-        HeyTaxiService.shared.loadMe {
+    func updateMe(name: String) {
+        HeyTaxiService.shared.updateMe(name: name) {
             result in
             self.success = result.success
             self.message = result.message
             self.user = result.user
         }
+    }
+    
+    func loadMe() {
+        
     }
 }
