@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserModel: Codable {
-    let name: String?
+    var name: String?
     let username: String?
     
     init(name: String, username: String) {
