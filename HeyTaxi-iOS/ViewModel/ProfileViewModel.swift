@@ -21,7 +21,13 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func loadMe() {
-        
+    func loadMe(completion: @escaping (UserModel) -> Void) {
+        HeyTaxiService.shared.loadMe {
+            result in
+            if(result.success) {
+                self.user = result.user
+                completion(result.user)
+            }
+        }
     }
 }
