@@ -12,8 +12,8 @@ class ProfileViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var user: UserModel?
     
-    func updateMe(name: String) {
-        HeyTaxiService.shared.updateMe(name: name) {
+    func updateMe(user: UserModel) {
+        HeyTaxiService.shared.updateMe(user: user) {
             result in
             self.success = result.success
             self.message = result.message
