@@ -22,22 +22,36 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
                 Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true)
-                    .frame(height: 900)
                     .ignoresSafeArea(edges: .all)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: ProfileView()) {
-                        Image(systemName: "person")
+                    .scaledToFill()
+                
+                VStack {
+                    Spacer()
+                    
+                    Button(action: {}) {
+                        Image(systemName: "car")
+                    }
+                    .frame(width: 60, height: 60, alignment: .center)
+                    .background(Color.mainGreen)
+                    .cornerRadius(38.5)
+                    .padding()
+                    .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
+                }
+                
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: ProfileView()) {
+                            Image(systemName: "person")
+                        }
                     }
                 }
-            }
-            .onAppear {
-                viewModel.loadMe()
-                viewModel.requestPermission()
-                viewModel.registerSocket()
+                .onAppear {
+                    viewModel.loadMe()
+                    viewModel.requestPermission()
+                    viewModel.registerSocket()
+                }
             }
         }.navigationBarHidden(true)
     }
