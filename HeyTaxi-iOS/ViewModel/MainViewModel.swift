@@ -42,9 +42,6 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     //승객이 자신 주변의 빈 차 유무를 알 수 있게 하기 위해 빈 차를 보여줌
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastSeenLocation = locations.first
-        if(status == TaxiStatus.empty) {
-            //sendLocation()
-        }
     }
     
     func requestPermission() {
@@ -67,15 +64,16 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     func subscribe() {
         socketClient.subscribe(destination: "/user/topic/error")
         socketClient.subscribe(destination: "/user/\((self.user!.username)!)/topic/reservation")
-        socketClient.subscribe(destination: "/topic/empty")
+        socketClient.subscribe(destination: "/topic/empty") //빈차정보불러올때 쓰기
     }
     
-    func sendLocation() {
-        var location: EmptyCarModel = EmptyCarModel(taxi: nil, location: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longtitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)))
+    //택시 요청 큐에 승객 위치 보냄
+    func requestCall() {
+        var location: CallModel = CallModel(src: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)), dest: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)))
         let encoder = try! JSONEncoder().encode(location)
         let result = String(data: encoder, encoding: .utf8)
         
-        socketClient.sendMessage(message: result!, toDestination: "/app/empty/update", withHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!, "content-type": "application/json"], withReceipt: nil)
+        socketClient.sendMessage(message: result!, toDestination: "/app/call/request", withHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!, "content-type": "application/json"], withReceipt: nil)
     }
     
     func disconnect() {
@@ -83,13 +81,8 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     }
     
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        
+                
     }
-    
-//    func stompClientJSONBody(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-//            print("des :" + destination)
-//            print("jb : " + jsonBody!)
-//    }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
         print("Socket is Disconnected!!!")
