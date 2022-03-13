@@ -9,10 +9,10 @@ import Foundation
 
 struct LocationModel: Codable {
     let latitude: Double
-    let longtitude: Double
+    let longitude: Double
     
-    init(latitude: Double, longtitude: Double) {
+    init(latitude: Double, longitude: Double) {
         self.latitude = latitude
-        self.longtitude = longtitude
+        self.longitude = longitude
     }
 }
