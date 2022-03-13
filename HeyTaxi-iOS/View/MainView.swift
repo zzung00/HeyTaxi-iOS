@@ -24,6 +24,8 @@ struct MainView: View {
         NavigationView {
             VStack {
                 Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true)
+                    .frame(height: 900)
+                    .ignoresSafeArea(edges: .all)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
