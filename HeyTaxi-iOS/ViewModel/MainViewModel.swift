@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import StompClientLib
+import SwiftUI
 
 class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, StompClientLibDelegate {
     private let url = NSURL(string: "ws://\(HeyTaxiService.host)/heytaxi-ws/websocket")
@@ -18,6 +19,9 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     private let locationManager: CLLocationManager
     @Published var lastSeenLocation: CLLocation?
     private var status = TaxiStatus.off
+    private var taxis: [Int: EmptyCarModel] = [:]
+    @State private var errorAlert:Bool = false
+    @State private var reserveAlert:Bool = false
     
     override init() {
         locationManager = CLLocationManager()
@@ -62,8 +66,8 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     }
     
     func subscribe() {
-        socketClient.subscribe(destination: "/user/topic/error")
-        socketClient.subscribe(destination: "/user/\((self.user!.username)!)/topic/reservation")
+        socketClient.subscribe(destination: "/topic/error")
+        socketClient.subscribe(destination: "/user/topic/reservation")
         socketClient.subscribe(destination: "/topic/empty") //빈차정보불러올때 쓰기
     }
     
@@ -81,7 +85,28 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     }
     
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-                
+        print(destination)
+        let data = try! JSONSerialization.data(withJSONObject: jsonBody!, options: .prettyPrinted)
+        print(data)
+        let decoder = JSONDecoder()
+        
+        switch destination {
+        case "/topic/error" :
+            errorAlert = true
+            let errorResponse = try! decoder.decode(ErrorModel.self, from: data)
+            print(errorResponse)
+        case "/user/topic/reservation" :
+            //빈차는 안보이게, 예약알림 다이얼로그 및 예약된 택시만 보이게
+            reserveAlert = true
+            let reservationResponse = try! decoder.decode(ReservationModel.self, from: data)
+        case "/topic/empty" :
+            //택시 위치 dictionary에 저장
+            let emptyResponse = try! decoder.decode(EmptyCarModel.self, from: data)
+            //taxis[emptyResponse.taxi!.id] = emptyResponse
+            print(emptyResponse)
+        default:
+            return
+        }
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
