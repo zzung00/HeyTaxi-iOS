@@ -30,7 +30,7 @@ struct MainView: View {
                 VStack {
                     Spacer()
                     
-                    Button(action: {}) {
+                    Button(action: {viewModel.requestCall()}) {
                         Image(systemName: "car")
                     }
                     .frame(width: 60, height: 60, alignment: .center)
