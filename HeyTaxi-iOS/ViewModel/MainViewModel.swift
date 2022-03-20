@@ -63,6 +63,7 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     //socket connection
     func registerSocket() {
         socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url as! URL), delegate: self as! StompClientLibDelegate, connectionHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!])
+        //dfd
     }
     
     func subscribe() {
