@@ -62,11 +62,11 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     
     //socket connection
     func registerSocket() {
-        socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url as! URL), delegate: self as! StompClientLibDelegate, connectionHeaders: ["Authorizaion": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!])
+        socketClient.openSocketWithURLRequest(request: NSURLRequest(url: url as! URL), delegate: self as! StompClientLibDelegate, connectionHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!])
     }
     
     func subscribe() {
-        socketClient.subscribe(destination: "/topic/error")
+        socketClient.subscribe(destination: "/user/topic/error")
         socketClient.subscribe(destination: "/user/topic/reservation")
         socketClient.subscribe(destination: "/topic/empty") //빈차정보불러올때 쓰기
     }
@@ -102,7 +102,7 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
         case "/topic/empty" :
             //택시 위치 dictionary에 저장
             let emptyResponse = try! decoder.decode(EmptyCarModel.self, from: data)
-            //taxis[emptyResponse.taxi!.id] = emptyResponse
+            taxis[emptyResponse.taxi!.id] = emptyResponse
             print(emptyResponse)
         default:
             return
