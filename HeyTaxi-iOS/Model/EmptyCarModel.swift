@@ -10,11 +10,9 @@ import Foundation
 struct EmptyCarModel: Codable {
     let taxi: TaxiModel?
     let location: LocationModel
-    let timestamp: String
     
-    init(taxi: TaxiModel?, location: LocationModel, timestamp: String) {
+    init(taxi: TaxiModel?, location: LocationModel) {
         self.taxi = taxi
         self.location = location
-        self.timestamp = timestamp
     }
 }
