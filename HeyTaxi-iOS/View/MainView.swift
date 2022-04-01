@@ -13,7 +13,9 @@ struct MainView: View {
     @State private var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: MapDefaults.latitude, longitude: MapDefaults.longitude),
         span: MKCoordinateSpan(latitudeDelta: CLLocationDegrees(MapDefaults.zoom), longitudeDelta: MapDefaults.zoom))
-    
+    @State private var showAlert = false
+
+    //사용자 위치에 맞게 조정되게 변경 예정
     private enum MapDefaults {
         static let latitude = 35.96322239939191
         static let longitude = 126.98783602642584
@@ -27,17 +29,51 @@ struct MainView: View {
                     .ignoresSafeArea(edges: .all)
                     .scaledToFill()
                 
+                if showAlert == true {
+                    ZStack {
+                        VStack(alignment: .center, spacing: 25) {
+                            Text("🚕")
+                            Text("예약콜 대기 중...")
+                                .bold()
+                        }
+                        Spacer()
+                    }
+                    .foregroundColor(.white)
+                    .padding(12)
+                    .background(Color.mainGreen)
+                    .cornerRadius(8)
+                    .transition(AnyTransition.opacity.animation(.easeInOut))
+                }
+                
                 VStack {
                     Spacer()
                     
-                    Button(action: {viewModel.requestCall()}) {
-                        Image(systemName: "car")
+                    if showAlert == false {
+                        Button(action: {
+                            viewModel.requestCall()
+                            self.showAlert = true
+                        }) {
+                            Image(systemName: "car")
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 60, height: 60, alignment: .center)
+                        .background(Color.mainGreen)
+                        .cornerRadius(38.5)
+                        .padding()
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
                     }
-                    .frame(width: 60, height: 60, alignment: .center)
-                    .background(Color.mainGreen)
-                    .cornerRadius(38.5)
-                    .padding()
-                    .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
+                    else {
+                        Button(action: {self.showAlert = false}) {
+                            Image(systemName: "multiply")
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 60, height: 60, alignment: .center)
+                        .background(Color.red)
+                        .cornerRadius(38.5)
+                        .padding()
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
+                    }
+                    
                 }
                 
                 .toolbar {
