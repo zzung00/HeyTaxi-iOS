@@ -19,6 +19,9 @@
 		E26AFAB827CDE1F300DA3554 /* TokenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26AFAB727CDE1F300DA3554 /* TokenUtils.swift */; };
 		E26B856427CF05B300B2F04A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26B856327CF05B300B2F04A /* SplashView.swift */; };
 		E26B856627CF05E800B2F04A /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26B856527CF05E800B2F04A /* SplashViewModel.swift */; };
+		E28D211E27F6CF960003D16A /* JalnanOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28D211D27F6CF960003D16A /* JalnanOTF.otf */; };
+		E28D211F27F6CF960003D16A /* JalnanOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28D211D27F6CF960003D16A /* JalnanOTF.otf */; };
+		E28D212027F6CF960003D16A /* JalnanOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28D211D27F6CF960003D16A /* JalnanOTF.otf */; };
 		E2AECB6027C769CB00141BBA /* HeyTaxi_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AECB5F27C769CB00141BBA /* HeyTaxi_iOSApp.swift */; };
 		E2AECB6427C769CC00141BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2AECB6327C769CC00141BBA /* Assets.xcassets */; };
 		E2AECB6727C769CC00141BBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2AECB6627C769CC00141BBA /* Preview Assets.xcassets */; };
@@ -73,6 +76,7 @@
 		E26AFAB727CDE1F300DA3554 /* TokenUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenUtils.swift; sourceTree = "<group>"; };
 		E26B856327CF05B300B2F04A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		E26B856527CF05E800B2F04A /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		E28D211D27F6CF960003D16A /* JalnanOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JalnanOTF.otf; sourceTree = "<group>"; };
 		E2AECB5C27C769CB00141BBA /* HeyTaxi-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HeyTaxi-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2AECB5F27C769CB00141BBA /* HeyTaxi_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeyTaxi_iOSApp.swift; sourceTree = "<group>"; };
 		E2AECB6327C769CC00141BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,7 +98,6 @@
 		E2E6F87027D5CBF400C7E014 /* VerifiedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedView.swift; sourceTree = "<group>"; };
 		E2E6F87227D5CD4000C7E014 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E2E9F0F227D0F102009D82E0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		E2E9F0F427D0F3BC009D82E0 /* JalnanOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JalnanOTF.otf; sourceTree = "<group>"; };
 		E6B388C8200C11D09CBC93C7 /* Pods-HeyTaxi-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeyTaxi-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-HeyTaxi-iOSTests/Pods-HeyTaxi-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -274,7 +277,7 @@
 		E2E9F0F127D0F0E6009D82E0 /* font */ = {
 			isa = PBXGroup;
 			children = (
-				E2E9F0F427D0F3BC009D82E0 /* JalnanOTF.otf */,
+				E28D211D27F6CF960003D16A /* JalnanOTF.otf */,
 			);
 			path = font;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28D211E27F6CF960003D16A /* JalnanOTF.otf in Resources */,
 				E2AECB6727C769CC00141BBA /* Preview Assets.xcassets in Resources */,
 				E2AECB6427C769CC00141BBA /* Assets.xcassets in Resources */,
 			);
@@ -410,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28D211F27F6CF960003D16A /* JalnanOTF.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28D212027F6CF960003D16A /* JalnanOTF.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
