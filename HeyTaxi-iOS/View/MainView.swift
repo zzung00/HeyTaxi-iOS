@@ -33,7 +33,6 @@ struct MainView: View {
             ZStack {
                 Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: viewModel.arr, annotationContent: {taxi in
                     MapMarker(coordinate: taxi.coordinate)
-                    
                 })
                 .ignoresSafeArea(edges: .all)
                 .scaledToFill()

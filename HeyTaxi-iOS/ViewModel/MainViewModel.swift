@@ -24,7 +24,6 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     var arr = [taxiMarker]()
     @State private var errorAlert:Bool = false
     @State private var reserveAlert:Bool = false
-    var mapView: MKMapView = MKMapView()
     
     override init() {
         locationManager = CLLocationManager()
