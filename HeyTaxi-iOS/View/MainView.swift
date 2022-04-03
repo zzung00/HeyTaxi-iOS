@@ -8,6 +8,12 @@
 import SwiftUI
 import MapKit
 
+struct taxiMarker: Identifiable {
+    let id = UUID()
+    let name: String
+    dynamic var coordinate: CLLocationCoordinate2D
+}
+
 struct MainView: View {
     @StateObject private var viewModel = MainViewModel()
     @State private var region: MKCoordinateRegion = MKCoordinateRegion(
@@ -17,17 +23,20 @@ struct MainView: View {
 
     //사용자 위치에 맞게 조정되게 변경 예정
     private enum MapDefaults {
-        static let latitude = 35.96322239939191
-        static let longitude = 126.98783602642584
+        static let latitude = 37.33180
+        static let longitude = -122.02978
         static let zoom = 0.01
     }
     
     var body: some View {
         NavigationView {
             ZStack {
-                Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true)
-                    .ignoresSafeArea(edges: .all)
-                    .scaledToFill()
+                Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: viewModel.arr, annotationContent: {taxi in
+                    MapMarker(coordinate: taxi.coordinate)
+                    
+                })
+                .ignoresSafeArea(edges: .all)
+                .scaledToFill()
                 
                 if showAlert == true {
                     ZStack {

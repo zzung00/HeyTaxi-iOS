@@ -9,6 +9,7 @@ import Foundation
 import CoreLocation
 import StompClientLib
 import SwiftUI
+import MapKit
 
 class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, StompClientLibDelegate {
     private let url = NSURL(string: "ws://\(HeyTaxiService.host)/heytaxi-ws/websocket")
@@ -19,9 +20,11 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     private let locationManager: CLLocationManager
     @Published var lastSeenLocation: CLLocation?
     private var status = TaxiStatus.off
-    private var taxis: [Int: EmptyCarModel] = [:]
+    var taxis: [Int: EmptyCarModel] = [:]
+    var arr = [taxiMarker]()
     @State private var errorAlert:Bool = false
     @State private var reserveAlert:Bool = false
+    var mapView: MKMapView = MKMapView()
     
     override init() {
         locationManager = CLLocationManager()
@@ -85,9 +88,7 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     }
     
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        print(destination)
         let data = try! JSONSerialization.data(withJSONObject: jsonBody!, options: .prettyPrinted)
-        print(data)
         let decoder = JSONDecoder()
         
         switch destination {
@@ -103,6 +104,7 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
             //택시 위치 dictionary에 저장
             let emptyResponse = try! decoder.decode(EmptyCarModel.self, from: data)
             taxis[emptyResponse.taxi!.id] = emptyResponse
+            arr = taxis.map({(key: Int, value: EmptyCarModel) -> taxiMarker in return taxiMarker(name: value.taxi!.name, coordinate: CLLocationCoordinate2D(latitude: value.location.latitude, longitude: value.location.longitude))})
             print(emptyResponse)
         default:
             return
