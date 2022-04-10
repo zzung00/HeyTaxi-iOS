@@ -71,7 +71,10 @@ struct MainView: View {
                         .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
                     }
                     else {
-                        Button(action: {self.showAlert = false}) {
+                        Button(action: {
+                            viewModel.cancelCall()
+                            self.showAlert = false
+                        }) {
                             Image(systemName: "multiply")
                                 .foregroundColor(.white)
                         }

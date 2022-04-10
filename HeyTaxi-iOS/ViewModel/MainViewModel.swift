@@ -82,6 +82,11 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
         socketClient.sendMessage(message: result!, toDestination: "/app/call/request", withHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!, "content-type": "application/json"], withReceipt: nil)
     }
     
+    //택시 요청 취소
+    func cancelCall() {
+        socketClient.sendMessage(message: "", toDestination: "/app/call/cancel", withHeaders: ["Authorization": TokenUtils.getToken(serviceID: HeyTaxiService.baseUrl)!, "content-type": "application/json"], withReceipt: nil)
+    }
+    
     func disconnect() {
         socketClient.disconnect()
     }
