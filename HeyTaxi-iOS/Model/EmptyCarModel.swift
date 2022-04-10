@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmptyCarModel: Codable {
+struct EmptyCarModel: Codable { 
     let taxi: TaxiModel?
     let location: LocationModel
     
