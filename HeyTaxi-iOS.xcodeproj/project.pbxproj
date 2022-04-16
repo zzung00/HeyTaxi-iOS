@@ -22,9 +22,6 @@
 		E28D211E27F6CF960003D16A /* JalnanOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28D211D27F6CF960003D16A /* JalnanOTF.otf */; };
 		E28D211F27F6CF960003D16A /* JalnanOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28D211D27F6CF960003D16A /* JalnanOTF.otf */; };
 		E28D212027F6CF960003D16A /* JalnanOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = E28D211D27F6CF960003D16A /* JalnanOTF.otf */; };
-		E28D212227F6D6A10003D16A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D212127F6D6A10003D16A /* TestView.swift */; };
-		E28D212327F6D6A10003D16A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D212127F6D6A10003D16A /* TestView.swift */; };
-		E28D212427F6D6A10003D16A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D212127F6D6A10003D16A /* TestView.swift */; };
 		E2AECB6027C769CB00141BBA /* HeyTaxi_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AECB5F27C769CB00141BBA /* HeyTaxi_iOSApp.swift */; };
 		E2AECB6427C769CC00141BBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2AECB6327C769CC00141BBA /* Assets.xcassets */; };
 		E2AECB6727C769CC00141BBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2AECB6627C769CC00141BBA /* Preview Assets.xcassets */; };
@@ -80,7 +77,6 @@
 		E26B856327CF05B300B2F04A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		E26B856527CF05E800B2F04A /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		E28D211D27F6CF960003D16A /* JalnanOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JalnanOTF.otf; sourceTree = "<group>"; };
-		E28D212127F6D6A10003D16A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		E2AECB5C27C769CB00141BBA /* HeyTaxi-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HeyTaxi-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2AECB5F27C769CB00141BBA /* HeyTaxi_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeyTaxi_iOSApp.swift; sourceTree = "<group>"; };
 		E2AECB6327C769CC00141BBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,7 +237,6 @@
 				E2E6F87027D5CBF400C7E014 /* VerifiedView.swift */,
 				E2E6F87227D5CD4000C7E014 /* MainView.swift */,
 				E24C8EED27D7404900CA505F /* ProfileView.swift */,
-				E28D212127F6D6A10003D16A /* TestView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -543,7 +538,6 @@
 			files = (
 				E2E6F86D27D5C94E00C7E014 /* VerifyView.swift in Sources */,
 				E2DED7B727DDB46F0063139A /* CallModel.swift in Sources */,
-				E28D212227F6D6A10003D16A /* TestView.swift in Sources */,
 				E260A4AD27D7599F0016642F /* ProfileViewModel.swift in Sources */,
 				E2AECB9027C76BE700141BBA /* HeyTaxiService.swift in Sources */,
 				E2B5EA5E27D1AA5000617600 /* VerifyViewModel.swift in Sources */,
@@ -570,7 +564,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28D212327F6D6A10003D16A /* TestView.swift in Sources */,
 				E2AECB7127C769CC00141BBA /* HeyTaxi_iOSTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -579,7 +572,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28D212427F6D6A10003D16A /* TestView.swift in Sources */,
 				E2AECB7B27C769CC00141BBA /* HeyTaxi_iOSUITests.swift in Sources */,
 				E2AECB7D27C769CC00141BBA /* HeyTaxi_iOSUITestsLaunchTests.swift in Sources */,
 			);

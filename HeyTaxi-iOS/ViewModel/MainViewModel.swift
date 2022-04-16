@@ -23,7 +23,9 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     var taxis: [Int: EmptyCarModel] = [:]
     var arr = [taxiMarker]()
     @State private var errorAlert:Bool = false
-    @State private var reserveAlert:Bool = false
+    @Published var reserveAlert:Bool = false
+    @Published var reservationInfo: ReservationModel?
+    @Published var waiting = false
     
     override init() {
         locationManager = CLLocationManager()
@@ -102,9 +104,9 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
             print(errorResponse)
         case "/user/topic/reservation" :
             //빈차는 안보이게, 예약알림 다이얼로그 및 예약된 택시만 보이게
+            reservationInfo = try! decoder.decode(ReservationModel.self, from: data)
+            waiting = false
             reserveAlert = true
-            let reservationResponse = try! decoder.decode(ReservationModel.self, from: data)
-            print(reservationResponse)
         case "/topic/empty" :
             //택시 위치 dictionary에 저장
             let emptyResponse = try! decoder.decode(EmptyCarModel.self, from: data)
