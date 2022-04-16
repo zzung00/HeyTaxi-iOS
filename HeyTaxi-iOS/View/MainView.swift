@@ -19,7 +19,6 @@ struct MainView: View {
     @State private var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: MapDefaults.latitude, longitude: MapDefaults.longitude),
         span: MKCoordinateSpan(latitudeDelta: CLLocationDegrees(MapDefaults.zoom), longitudeDelta: MapDefaults.zoom))
-    @State private var showAlert = false
 
     //사용자 위치에 맞게 조정되게 변경 예정
     private enum MapDefaults {
@@ -41,7 +40,7 @@ struct MainView: View {
                 .ignoresSafeArea(edges: .all)
                 .scaledToFill()
                 
-                if showAlert == true {
+                if viewModel.waiting == true {
                     ZStack {
                         VStack(alignment: .center, spacing: 25) {
                             Text("🚕")
@@ -60,10 +59,10 @@ struct MainView: View {
                 VStack {
                     Spacer()
                     
-                    if showAlert == false {
+                    if viewModel.waiting == false {
                         Button(action: {
                             viewModel.requestCall()
-                            self.showAlert = true
+                            viewModel.waiting = true
                         }) {
                             Image(systemName: "car")
                                 .foregroundColor(.white)
@@ -77,7 +76,7 @@ struct MainView: View {
                     else {
                         Button(action: {
                             viewModel.cancelCall()
-                            self.showAlert = false
+                            viewModel.waiting = false
                         }) {
                             Image(systemName: "multiply")
                                 .foregroundColor(.white)
@@ -102,6 +101,10 @@ struct MainView: View {
                     viewModel.loadMe()
                     viewModel.requestPermission()
                     viewModel.registerSocket()
+                }
+                
+                .alert(isPresented: $viewModel.reserveAlert) {
+                    Alert(title: Text("HeyTaxi"), message: Text("\(String(describing: viewModel.reservationInfo!.taxi.taxi!.carNumber)) 택시가 예약되었습니다"), dismissButton: .default(Text("확인")))
                 }
             }
         }.navigationBarHidden(true)
