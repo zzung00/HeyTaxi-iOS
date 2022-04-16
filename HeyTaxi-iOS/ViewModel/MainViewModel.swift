@@ -75,7 +75,7 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
     
     //택시 요청 큐에 승객 위치 보냄
     func requestCall() {
-        var location: CallModel = CallModel(src: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)), dest: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)))
+        var location: CallModel = CallModel(src: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)), dst: LocationModel(latitude: Double(lastSeenLocation?.coordinate.latitude ?? 0), longitude: Double(lastSeenLocation?.coordinate.longitude ?? 0)))
         let encoder = try! JSONEncoder().encode(location)
         let result = String(data: encoder, encoding: .utf8)
         
@@ -104,6 +104,7 @@ class MainViewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Stom
             //빈차는 안보이게, 예약알림 다이얼로그 및 예약된 택시만 보이게
             reserveAlert = true
             let reservationResponse = try! decoder.decode(ReservationModel.self, from: data)
+            print(reservationResponse)
         case "/topic/empty" :
             //택시 위치 dictionary에 저장
             let emptyResponse = try! decoder.decode(EmptyCarModel.self, from: data)
