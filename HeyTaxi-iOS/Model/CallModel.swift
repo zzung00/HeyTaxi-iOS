@@ -9,10 +9,10 @@ import Foundation
 
 struct CallModel: Codable {
     var src: LocationModel
-    var dest: LocationModel
+    var dst: LocationModel
     
-    init(src: LocationModel, dest: LocationModel) {
+    init(src: LocationModel, dst: LocationModel) {
         self.src = src
-        self.dest = dest
+        self.dst = dst
     }
 }
