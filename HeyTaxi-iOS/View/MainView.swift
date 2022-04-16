@@ -32,7 +32,11 @@ struct MainView: View {
         NavigationView {
             ZStack {
                 Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, userTrackingMode: .constant(.follow), annotationItems: viewModel.arr, annotationContent: {taxi in
-                    MapMarker(coordinate: taxi.coordinate)
+                    MapAnnotation(coordinate: taxi.coordinate) {
+                        Image("taxi")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    }
                 })
                 .ignoresSafeArea(edges: .all)
                 .scaledToFill()
